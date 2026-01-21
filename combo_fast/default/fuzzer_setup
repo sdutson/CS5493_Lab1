@@ -1,0 +1,6 @@
+# environment variables:
+AFL_CUSTOM_INFO_PROGRAM=./vulnerable
+AFL_CUSTOM_INFO_PROGRAM_ARGV=
+AFL_CUSTOM_INFO_OUT=out/combo_fast/default
+# command line:
+'afl-fuzz' '-i' 'inputs' '-o' 'out/combo_fast' '-p' 'fast' './vulnerable'
