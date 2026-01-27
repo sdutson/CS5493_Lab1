@@ -1,0 +1,52 @@
+=================================================================
+==2755==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x504000000079 at pc 0x61b16f49909e bp 0x7ffc55dff2f0 sp 0x7ffc55dfea90
+WRITE of size 27 at 0x504000000079 thread T0
+    #0 0x61b16f49909d in strcat (/home/sam/Documents/Fuzzing/afl-training/quickstart/vulnerable+0xae09d) (BuildId: 2b8ad9adf69b1b963a1e458b3878476be51cd291)
+    #1 0x61b16f4f09ee in process /home/sam/Documents/Fuzzing/afl-training/quickstart/vulnerable.c:39:3
+    #2 0x61b16f4f0c1b in main /home/sam/Documents/Fuzzing/afl-training/quickstart/vulnerable.c:85:12
+    #3 0x7d9354a2a1c9 in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #4 0x7d9354a2a28a in __libc_start_main csu/../csu/libc-start.c:360:3
+    #5 0x61b16f417344 in _start (/home/sam/Documents/Fuzzing/afl-training/quickstart/vulnerable+0x2c344) (BuildId: 2b8ad9adf69b1b963a1e458b3878476be51cd291)
+
+0x504000000079 is located 0 bytes after 41-byte region [0x504000000050,0x504000000079)
+allocated by thread T0 here:
+    #0 0x61b16f4b2193 in malloc (/home/sam/Documents/Fuzzing/afl-training/quickstart/vulnerable+0xc7193) (BuildId: 2b8ad9adf69b1b963a1e458b3878476be51cd291)
+    #1 0x61b16f4f088e in process /home/sam/Documents/Fuzzing/afl-training/quickstart/vulnerable.c:18:9
+    #2 0x61b16f4f0c1b in main /home/sam/Documents/Fuzzing/afl-training/quickstart/vulnerable.c:85:12
+    #3 0x7d9354a2a1c9 in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #4 0x7d9354a2a28a in __libc_start_main csu/../csu/libc-start.c:360:3
+    #5 0x61b16f417344 in _start (/home/sam/Documents/Fuzzing/afl-training/quickstart/vulnerable+0x2c344) (BuildId: 2b8ad9adf69b1b963a1e458b3878476be51cd291)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow (/home/sam/Documents/Fuzzing/afl-training/quickstart/vulnerable+0xae09d) (BuildId: 2b8ad9adf69b1b963a1e458b3878476be51cd291) in strcat
+Shadow bytes around the buggy address:
+  0x503ffffffd80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x503ffffffe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x503ffffffe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x503fffffff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x503fffffff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x504000000000: fa fa 00 00 00 00 00 06 fa fa 00 00 00 00 00[01]
+  0x504000000080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x504000000100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x504000000180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x504000000200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x504000000280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==2755==ABORTING
